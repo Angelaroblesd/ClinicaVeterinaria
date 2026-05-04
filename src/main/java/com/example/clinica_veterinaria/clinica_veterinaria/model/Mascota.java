@@ -5,16 +5,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import jakarta.validation.constraints.*;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Entity
 public class Mascota {
 
@@ -31,11 +31,20 @@ public class Mascota {
     @Min(value = 0, message = "La edad no puede ser negativa")
     private Integer edad;
 
-    @NotBlank(message = "La especie es obligatoria")
-    private String especie;
+    @NotBlank(message = "el sexo es obligatorio")
+    @Size(min = 2, max = 10, message = "El sexo no debe tener mas de 10 caracteres")
+    @Column(nullable = false, length = 10)
+    private String sexo;
 
-    private String raza;
+    @ManyToOne
+    @JoinColumn(name = "especie_id", nullable = false)
+    private Especie especie;
 
-    @NotBlank(message = "El nombre del dueño es obligatorio")
-    private String nombreDueno;
+    @ManyToOne
+    @JoinColumn(name = "raza_id", nullable = true)
+    private Raza raza;
+
+    @ManyToOne
+    @JoinColumn(name = "dueno_id", nullable = false)
+    private Dueno dueno;
 }
