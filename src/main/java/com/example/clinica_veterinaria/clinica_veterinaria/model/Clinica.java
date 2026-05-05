@@ -50,4 +50,6 @@ public class Clinica {
      @ToString.Exclude
      private List<Veterinario> veterinarios;
 
+     public Object getComuna;
+
 }

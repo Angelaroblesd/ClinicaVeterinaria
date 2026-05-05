@@ -60,5 +60,4 @@ public class Consulta {
      @OneToMany(mappedBy = "consulta")
      @ToString.Exclude
      private List<Pago> pagos;
-
 }
