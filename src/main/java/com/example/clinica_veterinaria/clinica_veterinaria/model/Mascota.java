@@ -1,5 +1,7 @@
 package com.example.clinica_veterinaria.clinica_veterinaria.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,10 +9,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
@@ -29,6 +33,8 @@ public class Mascota {
 
     @NotNull(message = "La edad es obligatoria")
     @Min(value = 0, message = "La edad no puede ser negativa")
+    @Max(value = 40, message = "La edad no puede ser mayor a 40 años")
+    @Column(nullable = false)
     private Integer edad;
 
     @NotBlank(message = "el sexo es obligatorio")
@@ -47,4 +53,10 @@ public class Mascota {
     @ManyToOne
     @JoinColumn(name = "dueno_id", nullable = false)
     private Dueno dueno;
+
+    @OneToMany(mappedBy = "mascota")
+    @ToString.Exclude
+    private List<Consulta> consultas;
+
+
 }

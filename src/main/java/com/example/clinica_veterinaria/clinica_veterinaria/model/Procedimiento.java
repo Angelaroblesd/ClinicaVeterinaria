@@ -1,15 +1,12 @@
 package com.example.clinica_veterinaria.clinica_veterinaria.model;
 
 import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -18,27 +15,26 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 
-public class Comuna {
+public class Procedimiento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank(message = "El nombre de la comuna es obligatorio")
-    @Size(min = 3, max = 60, message = "El nombre de la comuna debe tener entre 3 y 60 caracteres")
-    @Column(nullable = false, length = 60)
-    private String nombreComuna;
+    @NotBlank(message = "El nombre de el procedimiento es obligatorio")
+    @Size(min = 3, max = 100, message = "El nombre debe tener entre 3 y 100 caracteres")
+    @Column(nullable = false, length = 100)
+    private String nombre;
     
-    @ManyToOne
-    @JoinColumn(name = "region_id", nullable = false)
-    private Region region;
+    @NotBlank(message = "la descripcion es obligatoria")
+    @Size(min = 3, max = 500, message = "El nombre debe tener entre 3 y 500 caracteres")
+    @Column(nullable = false, length = 500)
+    private String descripcion;
 
-    @OneToMany(mappedBy = "comuna")
+    @ManyToMany(mappedBy = "procedimientos")
     @ToString.Exclude
-    private List<Clinica> clinicas;
-
-
+    private List<Consulta> consultas;
 }
