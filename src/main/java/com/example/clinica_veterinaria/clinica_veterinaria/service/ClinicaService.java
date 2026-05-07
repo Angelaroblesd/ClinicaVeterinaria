@@ -72,10 +72,12 @@ public class ClinicaService {
        dto.setTelefono(clinica.getTelefono());
 
        if (clinica.getComuna() != null) {
-         dto.setComunaId(clinica.getComuna().getId());
+         dto.setNombreComuna(clinica.getComuna().getNombreComuna());
+         dto.setNombreRegion(clinica.getComuna().getRegion().getNombreRegion());
        }
               return dto;
       }
+
 
 
 }

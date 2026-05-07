@@ -49,7 +49,4 @@ public class Clinica {
      @OneToMany(mappedBy = "clinica")
      @ToString.Exclude
      private List<Veterinario> veterinarios;
-
-     public Object getComuna;
-
 }
