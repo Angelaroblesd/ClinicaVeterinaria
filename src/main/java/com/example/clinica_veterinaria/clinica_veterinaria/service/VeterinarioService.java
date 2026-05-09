@@ -28,7 +28,7 @@ public class VeterinarioService {
         dto.setTotalConsultas(veterinario.getConsultas().size()) ;
        }
        else {
-          dto.setTotalConsultas(0);
+          dto.setTotalConsultas(0);//si no hay consultas muestra 0
             }
               return dto;
     }

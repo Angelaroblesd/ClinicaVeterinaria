@@ -19,7 +19,7 @@ import com.example.clinica_veterinaria.clinica_veterinaria.model.Clinica;
 import com.example.clinica_veterinaria.clinica_veterinaria.service.ClinicaService;
 
 @RestController
-@RequestMapping("/api/v1/clinica-veterinaria")
+@RequestMapping("/api/v1/clinica")
 public class ClinicaController {
     @Autowired
     private ClinicaService clinicaService;
