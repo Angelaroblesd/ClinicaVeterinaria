@@ -25,7 +25,7 @@ public class ClinicaService {
     }
 
 
-   public ClinicaDTO buscarPorId(Integer id) {
+    public ClinicaDTO buscarPorId(Integer id) {
        Clinica clinica = clinicaRepository.findById(id)
            .orElseThrow(() -> new RuntimeException("clinica no encontrada"));
        return convertirADTO(clinica);
@@ -64,7 +64,7 @@ public class ClinicaService {
        return clinicaRepository.save(clinica);
      }
 
-     private ClinicaDTO convertirADTO(Clinica clinica) {
+    private ClinicaDTO convertirADTO(Clinica clinica) {
        ClinicaDTO dto = new ClinicaDTO();
        dto.setId(clinica.getId());
        dto.setNombreClinica(clinica.getNombreClinica());
@@ -76,8 +76,6 @@ public class ClinicaService {
          dto.setNombreRegion(clinica.getComuna().getRegion().getNombreRegion());
        }
               return dto;
-      }
-
-
+     }
 
 }

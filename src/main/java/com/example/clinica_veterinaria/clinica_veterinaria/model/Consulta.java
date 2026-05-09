@@ -9,8 +9,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
@@ -52,10 +50,6 @@ public class Consulta {
      @JoinColumn(name = "veterinario_id", nullable = false)
      private Veterinario veterinario; 
      
-     @ManyToMany
-     @JoinTable( name = "consulta_procedimiento", joinColumns = @JoinColumn(name = "consulta_id"), 
-     inverseJoinColumns = @JoinColumn(name = "procedimiento_id"))
-     private List<Procedimiento> procedimientos;
 
      @OneToMany(mappedBy = "consulta")
      @ToString.Exclude
