@@ -24,7 +24,7 @@ public class Region {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-  
+
     @NotBlank(message = "El nombre de la region es obligatorio")
     @Size(min = 2, max = 40, message = "debe tener entre 2 y 40 caracteres")
     @Column(nullable = false, length = 40)
