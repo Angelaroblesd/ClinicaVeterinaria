@@ -46,4 +46,18 @@ public class DuenoController {
     public ResponseEntity<String> eliminar(@PathVariable Integer id) {
         return new ResponseEntity<>(duenoService.eliminar(id), HttpStatus.OK);
     }
+
+    @GetMapping("/nombre/{nombre}")
+    public ResponseEntity<DuenoDTO> buscarPorNombre(@PathVariable String nombre) {
+        return new ResponseEntity<>(
+                duenoService.buscarPorNombre(nombre),
+                HttpStatus.OK);
+    }
+
+    @GetMapping("/descuento/{id}")
+    public ResponseEntity<String> aplicarDescuento(@PathVariable Integer id) {
+        return new ResponseEntity<>(
+                duenoService.aplicarDescuento(id),
+                HttpStatus.OK);
+    }
 }

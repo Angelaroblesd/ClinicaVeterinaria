@@ -21,6 +21,7 @@ import lombok.ToString;
 @Entity
 
 public class Region {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

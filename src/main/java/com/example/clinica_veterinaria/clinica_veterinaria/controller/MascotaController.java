@@ -32,13 +32,9 @@ public class MascotaController {
     public ResponseEntity<?> guardar(@RequestBody MascotaDTO dto) {
 
         try {
-
             MascotaDTO nuevaMascota = mascotaService.guardar(dto);
-
             return ResponseEntity.ok(nuevaMascota);
-
         } catch (RuntimeException e) {
-
             return ResponseEntity
                     .badRequest()
                     .body(e.getMessage());
@@ -48,7 +44,6 @@ public class MascotaController {
     @PutMapping("/{id}")
     public ResponseEntity<Mascota> actualizar(@PathVariable Integer id,
             @RequestBody Mascota mascota) {
-
         return new ResponseEntity<>(
                 mascotaService.actualizarMascota(id, mascota),
                 HttpStatus.OK);

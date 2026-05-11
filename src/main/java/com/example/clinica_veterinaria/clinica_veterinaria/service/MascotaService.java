@@ -70,14 +70,10 @@ public class MascotaService {
     }
 
     public String eliminar(Integer id) {
-
         if (mascotaRepository.existsById(id)) {
-
             mascotaRepository.deleteById(id);
-
             return "Mascota eliminada exitosamente";
         }
-
         return "Mascota no encontrada";
     }
 

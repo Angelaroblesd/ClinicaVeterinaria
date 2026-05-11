@@ -1,7 +1,3 @@
-// ==========================
-// REGION CONTROLLER CON DTO
-// ==========================
-
 package com.example.clinica_veterinaria.clinica_veterinaria.controller;
 
 import java.util.List;

@@ -88,4 +88,23 @@ public class DuenoService {
 
         return dueno;
     }
+
+    public DuenoDTO buscarPorNombre(String nombre) {
+
+    Dueno dueno = duenoRepository.findByNombre(nombre)
+            .orElseThrow(() -> new RuntimeException("Dueño no encontrado"));
+    return convertirADTO(dueno);
+    }
+
+    public String aplicarDescuento(Integer id) {
+        Dueno dueno = duenoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Dueño no encontrado"));
+        int cantidadMascotas = dueno.getMascotas().size();
+        if (cantidadMascotas >= 5) {
+            return "El dueño " + dueno.getNombre() +
+                " tiene descuento del 10%";
+        }
+        return "El dueño " + dueno.getNombre() +
+            " no tiene descuento";
+    }
 }
