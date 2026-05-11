@@ -51,7 +51,6 @@ public class DuenoService {
 
         d.setNombre(dueno.getNombre());
         d.setTelefono(dueno.getTelefono());
-
         return duenoRepository.save(d);
     }
 
@@ -65,32 +64,27 @@ public class DuenoService {
 
     private DuenoDTO convertirADTO(Dueno dueno) {
         DuenoDTO dto = new DuenoDTO();
-
         dto.setId(dueno.getId());
         dto.setRut(dueno.getRut());
         dto.setNombre(dueno.getNombre());
         dto.setTelefono(dueno.getTelefono());
         dto.setDireccion(dueno.getDireccion());
         dto.setMail(dueno.getMail());
-
         return dto;
     }
 
     private Dueno convertirAEntidad(DuenoDTO dto) {
         Dueno dueno = new Dueno();
-
         dueno.setId(dto.getId());
         dueno.setRut(dto.getRut());
         dueno.setNombre(dto.getNombre());
         dueno.setTelefono(dto.getTelefono());
         dueno.setDireccion(dto.getDireccion());
         dueno.setMail(dto.getMail());
-
         return dueno;
     }
 
     public DuenoDTO buscarPorNombre(String nombre) {
-
     Dueno dueno = duenoRepository.findByNombre(nombre)
             .orElseThrow(() -> new RuntimeException("Dueño no encontrado"));
     return convertirADTO(dueno);

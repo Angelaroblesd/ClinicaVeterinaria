@@ -26,12 +26,10 @@ public class EspecieService {
     }
 
     public String eliminar(Integer id) {
-
         if(especieRepository.existsById(id)) {
             especieRepository.deleteById(id);
             return "Especie eliminada";
         }
-
         return "Especie no encontrada";
     }
 }

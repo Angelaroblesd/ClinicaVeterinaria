@@ -36,7 +36,6 @@ public class DuenoController {
     @PutMapping("/{id}")
     public ResponseEntity<Dueno> actualizar(@PathVariable Integer id,
             @RequestBody Dueno dueno) {
-
         return new ResponseEntity<>(
                 duenoService.actualizarDueno(id, dueno),
                 HttpStatus.OK);

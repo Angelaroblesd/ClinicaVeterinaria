@@ -50,7 +50,7 @@ public class Consulta {
 
      @ManyToOne
      @JoinColumn(name = "veterinario_id", nullable = false)
-     private Veterinario veterinario; 
+     private Veterinario veterinario;
      
      @ManyToMany
      @JoinTable( name = "consulta_procedimiento", joinColumns = @JoinColumn(name = "consulta_id"), 

@@ -29,37 +29,25 @@ public class ComunaService {
     }
 
     public ComunaDTO buscarPorId(Integer id) {
-
         Optional<Comuna> comunaBuscada = comunaRepository.findById(id);
-
         if(comunaBuscada.isPresent()) {
-
             Comuna comuna = comunaBuscada.get();
-
             return convertirADTO(comuna);
         }
-
         return null;
     }
 
     public ComunaDTO guardar(ComunaDTO dto) {
-
         Comuna comuna = convertirAEntidad(dto);
-
         return convertirADTO(
                 comunaRepository.save(comuna));
     }
 
     public Comuna actualizarComuna(Integer id, Comuna comuna) {
-
         Optional<Comuna> comunaBuscada = comunaRepository.findById(id);
-
         if(comunaBuscada.isPresent()) {
-
             Comuna com = comunaBuscada.get();
-
             com.setNombreComuna(comuna.getNombreComuna());
-
             return comunaRepository.save(com);
         }
 
@@ -67,33 +55,24 @@ public class ComunaService {
     }
 
     public String eliminar(Integer id) {
-
         if(comunaRepository.existsById(id)) {
-
             comunaRepository.deleteById(id);
             return "Comuna eliminada exitosamente";
         }
-
         return "Comuna no encontrada";
     }
 
     private ComunaDTO convertirADTO(Comuna comuna) {
-
         ComunaDTO dto = new ComunaDTO();
-
         dto.setId(comuna.getId());
         dto.setNombreComuna(comuna.getNombreComuna());
-
         return dto;
     }
 
     private Comuna convertirAEntidad(ComunaDTO dto) {
-
         Comuna comuna = new Comuna();
-
         comuna.setId(dto.getId());
         comuna.setNombreComuna(dto.getNombreComuna());
-
         return comuna;
     }
 }

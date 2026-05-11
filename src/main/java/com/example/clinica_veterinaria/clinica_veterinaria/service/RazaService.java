@@ -26,12 +26,10 @@ public class RazaService {
     }
 
     public String eliminar(Integer id) {
-
         if(razaRepository.existsById(id)) {
             razaRepository.deleteById(id);
             return "Raza eliminada";
         }
-
         return "Raza no encontrada";
     }
 }

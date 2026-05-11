@@ -58,5 +58,4 @@ public class Mascota {
     @ToString.Exclude
     private List<Consulta> consultas;
 
-
 }

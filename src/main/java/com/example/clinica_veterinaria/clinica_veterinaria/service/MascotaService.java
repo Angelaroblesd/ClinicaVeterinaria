@@ -41,31 +41,23 @@ public class MascotaService {
     }
 
     public MascotaDTO buscarPorId(Integer id) {
-
         Mascota mascota = mascotaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
-
         return convertirADTO(mascota);
     }
 
     public MascotaDTO guardar(MascotaDTO dto) {
-
         Mascota mascota = convertirAEntidad(dto);
-
         Mascota nuevaMascota = mascotaRepository.save(mascota);
-
         return convertirADTO(nuevaMascota);
     }
 
     public Mascota actualizarMascota(Integer id, Mascota mascota) {
-
         Mascota masc = mascotaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Mascota no encontrada"));
-
         masc.setNombre(mascota.getNombre());
         masc.setEdad(mascota.getEdad());
         masc.setSexo(mascota.getSexo());
-
         return mascotaRepository.save(masc);
     }
 
@@ -78,43 +70,32 @@ public class MascotaService {
     }
 
     private MascotaDTO convertirADTO(Mascota mascota) {
-
         MascotaDTO dto = new MascotaDTO();
-
         dto.setId(mascota.getId());
         dto.setNombre(mascota.getNombre());
         dto.setEdad(mascota.getEdad());
         dto.setSexo(mascota.getSexo());
-
         dto.setDueno(mascota.getDueno().getNombre());
         dto.setEspecie(mascota.getEspecie().getNombreEspecie());
         dto.setRaza(mascota.getRaza().getNombreRaza());
-
         return dto;
     }
 
     private Mascota convertirAEntidad(MascotaDTO dto) {
-
         Mascota mascota = new Mascota();
-
         mascota.setId(dto.getId());
         mascota.setNombre(dto.getNombre());
         mascota.setEdad(dto.getEdad());
         mascota.setSexo(dto.getSexo());
-
         Dueno dueno = duenoRepository.findByNombre(dto.getDueno())
                 .orElseThrow(() -> new RuntimeException("Dueño no encontrado"));
-
         Especie especie = especieRepository.findByNombreEspecie(dto.getEspecie())
                 .orElseThrow(() -> new RuntimeException("Especie no encontrada"));
-
         Raza raza = razaRepository.findByNombreRaza(dto.getRaza())
                 .orElseThrow(() -> new RuntimeException("Raza no encontrada"));
-
         mascota.setDueno(dueno);
         mascota.setEspecie(especie);
         mascota.setRaza(raza);
-
         return mascota;
     }
 }

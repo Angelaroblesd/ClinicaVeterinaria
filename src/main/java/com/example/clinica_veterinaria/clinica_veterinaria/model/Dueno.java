@@ -55,5 +55,4 @@ public class Dueno {
     @ToString.Exclude
     private List<Mascota> mascotas;
 
-
 }

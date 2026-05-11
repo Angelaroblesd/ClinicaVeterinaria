@@ -20,7 +20,6 @@ public class RegionController {
 
     @GetMapping
     public ResponseEntity<List<RegionDTO>> listar() {
-
         return new ResponseEntity<>(
                 regionService.obtenerTodos(),
                 HttpStatus.OK);
@@ -29,7 +28,6 @@ public class RegionController {
     @GetMapping("/{id}")
     public ResponseEntity<RegionDTO> buscar(
             @PathVariable Integer id) {
-
         return new ResponseEntity<>(
                 regionService.buscarPorId(id),
                 HttpStatus.OK);
@@ -38,7 +36,6 @@ public class RegionController {
     @PostMapping
     public ResponseEntity<RegionDTO> guardar(
             @RequestBody RegionDTO dto) {
-
         return new ResponseEntity<>(
                 regionService.guardar(dto),
                 HttpStatus.CREATED);
@@ -48,7 +45,6 @@ public class RegionController {
     public ResponseEntity<Region> actualizar(
             @PathVariable Integer id,
             @RequestBody Region region) {
-
         return new ResponseEntity<>(
                 regionService.actualizarRegion(id, region),
                 HttpStatus.OK);
@@ -57,7 +53,6 @@ public class RegionController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(
             @PathVariable Integer id) {
-
         return new ResponseEntity<>(
                 regionService.eliminar(id),
                 HttpStatus.OK);
