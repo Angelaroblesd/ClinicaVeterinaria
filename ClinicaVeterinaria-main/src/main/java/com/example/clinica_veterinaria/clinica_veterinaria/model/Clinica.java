@@ -43,13 +43,10 @@ public class Clinica {
      private String telefono;
 
      @ManyToOne
-     @JoinColumn(name = "comuna_id", nullable = false)
+     @JoinColumn(name = "comuna_id", nullable = true)
      private Comuna comuna;
 
      @OneToMany(mappedBy = "clinica")
      @ToString.Exclude
      private List<Veterinario> veterinarios;
-
-     public Object getComuna;
-
 }

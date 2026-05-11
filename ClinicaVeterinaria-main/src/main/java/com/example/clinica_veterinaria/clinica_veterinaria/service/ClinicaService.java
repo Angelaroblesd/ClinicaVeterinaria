@@ -1,15 +1,12 @@
 package com.example.clinica_veterinaria.clinica_veterinaria.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.example.clinica_veterinaria.clinica_veterinaria.DTO.ClinicaDTO;
 import com.example.clinica_veterinaria.clinica_veterinaria.model.Clinica;
-import com.example.clinica_veterinaria.clinica_veterinaria.model.Comuna;
 import com.example.clinica_veterinaria.clinica_veterinaria.repository.ClinicaRepository;
-import com.example.clinica_veterinaria.clinica_veterinaria.repository.ComunaRepository;
+
 
 import jakarta.transaction.Transactional;
 
@@ -18,9 +15,7 @@ import jakarta.transaction.Transactional;
 public class ClinicaService {
     @Autowired
     private ClinicaRepository clinicaRepository;
-
-    @Autowired
-    private ComunaRepository comunaRepository;
+    
 
     public List<ClinicaDTO> obtenerTodos() {
        return clinicaRepository.findAll()
@@ -30,7 +25,7 @@ public class ClinicaService {
     }
 
 
-   public ClinicaDTO buscarPorId(Integer id) {
+    public ClinicaDTO buscarPorId(Integer id) {
        Clinica clinica = clinicaRepository.findById(id)
            .orElseThrow(() -> new RuntimeException("clinica no encontrada"));
        return convertirADTO(clinica);
@@ -48,22 +43,11 @@ public class ClinicaService {
        }
     }
 
-    public ClinicaDTO guardar(ClinicaDTO dto) {
+    public Clinica guardarClinica(Clinica clinica) {
+       return clinicaRepository.save(clinica);
+    }
 
-    Clinica clinica = new Clinica();
-    clinica.setNombreClinica(dto.getNombreClinica());
-    clinica.setDireccion(dto.getDireccion());
-    clinica.setTelefono(dto.getTelefono());
-
-    Comuna comuna = comunaRepository.findById(dto.getComunaId())
-        .orElseThrow(() -> new RuntimeException("Comuna no encontrada"));
-
-    clinica.setComuna(comuna);
-    Clinica guardada = clinicaRepository.save(clinica);
-    return convertirADTO(guardada);
-}
-
-    public Clinica actualizarHeroes(Integer id,Clinica cli){
+    public Clinica actualizarClinica(Integer id,Clinica cli){
        Clinica clinica = clinicaRepository.findById(id).orElseThrow(() -> new RuntimeException("la clinica no existe"));
        if(cli.getNombreClinica() != null){
            clinica.setNombreClinica(cli.getNombreClinica());
@@ -80,7 +64,7 @@ public class ClinicaService {
        return clinicaRepository.save(clinica);
      }
 
-     private ClinicaDTO convertirADTO(Clinica clinica) {
+    private ClinicaDTO convertirADTO(Clinica clinica) {
        ClinicaDTO dto = new ClinicaDTO();
        dto.setId(clinica.getId());
        dto.setNombreClinica(clinica.getNombreClinica());
@@ -88,12 +72,10 @@ public class ClinicaService {
        dto.setTelefono(clinica.getTelefono());
 
        if (clinica.getComuna() != null) {
-         dto.setComunaId(clinica.getComuna().getId());
+         dto.setNombreComuna(clinica.getComuna().getNombreComuna());
+         dto.setNombreRegion(clinica.getComuna().getRegion().getNombreRegion());
        }
               return dto;
-      }
-
-
-
+     }
 
 }

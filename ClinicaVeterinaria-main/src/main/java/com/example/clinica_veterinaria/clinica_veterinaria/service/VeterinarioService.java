@@ -24,7 +24,7 @@ public class VeterinarioService {
        dto.setTelefono(veterinario.getTelefono());
        dto.setEspecialidad(veterinario.getEspecialidad());
 
-       if (veterinario.getConsultas() != null) {//da el total de consultas
+       if (veterinario.getConsultas() != null) {//da el total de consultas si esque hay 
         dto.setTotalConsultas(veterinario.getConsultas().size()) ;
        }
        else {
@@ -78,9 +78,9 @@ public class VeterinarioService {
        }
        return veterinarioRepository.save(veterinario);
     }
-
-    public List<VeterinarioDTO> buscarPorEspecialidad(//metodo para buscar por especialidad
-        String especialidad) {
+    
+    //metodo para buscar por especialidad
+    public List<VeterinarioDTO> buscarPorEspecialidad(String especialidad) {
             List<Veterinario> veterinarios = veterinarioRepository.findByEspecialidad(especialidad);
             List<VeterinarioDTO> listaDTO = new ArrayList<>();
          for (Veterinario veterinario : veterinarios) {

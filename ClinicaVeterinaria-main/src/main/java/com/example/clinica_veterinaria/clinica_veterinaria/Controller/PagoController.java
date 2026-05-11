@@ -14,40 +14,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.clinica_veterinaria.clinica_veterinaria.DTO.ClinicaDTO;
-import com.example.clinica_veterinaria.clinica_veterinaria.model.Clinica;
-import com.example.clinica_veterinaria.clinica_veterinaria.service.ClinicaService;
+import com.example.clinica_veterinaria.clinica_veterinaria.DTO.PagoDTO;
+import com.example.clinica_veterinaria.clinica_veterinaria.model.Pago;
+import com.example.clinica_veterinaria.clinica_veterinaria.service.PagoService;
 
 @RestController
-@RequestMapping("/api/v1/clinica")
-public class ClinicaController {
+@RequestMapping("/api/v1/pagos")
+public class PagoController {
     @Autowired
-    private ClinicaService clinicaService;
+    private  PagoService pagoService;
 
     @GetMapping
-    public ResponseEntity<List<ClinicaDTO>> todasLasClinicas() {
-       List<ClinicaDTO> clinicas = clinicaService.obtenerTodos();
-       if (clinicas.isEmpty()) {
+    public ResponseEntity<List<PagoDTO>> todosLosPagos() {
+       List<PagoDTO> pagos = pagoService.obtenerTodos();
+       if (pagos.isEmpty()) {
            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
        }
-       return new ResponseEntity<>(clinicas, HttpStatus.OK);
+       return new ResponseEntity<>(pagos, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClinicaDTO> buscarPorId(@PathVariable Integer id) {
+    public ResponseEntity<PagoDTO> buscarPorId(@PathVariable Integer id) {
        try {
-           ClinicaDTO clinica = clinicaService.buscarPorId(id);
-           return new ResponseEntity<>(clinica, HttpStatus.OK);
+           PagoDTO pago = pagoService.buscarPorId(id);
+           return new ResponseEntity<>(pago, HttpStatus.OK);
        } catch (RuntimeException e) {
-           // Si el service lanza la excepción de "clinica no existe"
            return ResponseEntity.notFound().build();
        }
     }
 
     @PostMapping
-    public ResponseEntity<Clinica> agregarClinica(@RequestBody Clinica clinica) {
+    public ResponseEntity<Pago> agregarPago(@RequestBody Pago pago) {
        try {
-           Clinica guardado = clinicaService.guardarClinica(clinica);
+           Pago guardado = pagoService.guardarPago(pago);
            return new ResponseEntity<>(guardado, HttpStatus.CREATED);
        } catch (Exception e) {
            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -55,27 +54,23 @@ public class ClinicaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Clinica> modificarClinica(@PathVariable Integer id, @RequestBody Clinica clinica){
+    public ResponseEntity<Pago> modificarPago(@PathVariable Integer id, @RequestBody Pago pago){
        try{
-            Clinica newClinica = clinicaService.actualizarClinica( id, clinica);
-           return new ResponseEntity<>(newClinica, HttpStatus.OK);
+            Pago newPago = pagoService.actualizarPago( id, pago);
+           return new ResponseEntity<>(newPago, HttpStatus.OK);
        }catch (RuntimeException e) {
            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarClinica(@PathVariable Integer id) {
-       String resultado = clinicaService.eliminar(id);
-      
-       // Si el mensaje contiene "exitosamente", es un éxito
+    public ResponseEntity<String> eliminarPago(@PathVariable Integer id) {
+       String resultado = pagoService.eliminar(id);
        if (resultado.contains("exitosamente")) {
            return new ResponseEntity<>(resultado, HttpStatus.OK);
        } else {
            return new ResponseEntity<>(resultado, HttpStatus.NOT_FOUND);
        }
-   }
-
-
+    }
 
 }

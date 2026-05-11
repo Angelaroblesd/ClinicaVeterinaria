@@ -5,8 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.example.clinica_veterinaria.clinica_veterinaria.model.Region;
 
-
-
 @Repository
 public interface RegionRepository extends JpaRepository<Region, Integer>{
 
