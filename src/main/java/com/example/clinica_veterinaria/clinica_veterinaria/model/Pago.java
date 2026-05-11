@@ -34,7 +34,7 @@ public class Pago {
     @NotNull(message = "El monto es obligatorio")
     @Positive(message = "El monto debe ser mayor a cero")
     @Column(nullable = false)
-    private Double monto;
+    private Integer monto;
 
     @NotBlank(message = "El metodo de pago es obligatorio")
     @Size(min = 3, max = 50, message = "El metodo de pago debe tener entre 3 y 50 caracteres")

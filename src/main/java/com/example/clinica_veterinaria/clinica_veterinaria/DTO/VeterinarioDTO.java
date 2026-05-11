@@ -1,15 +1,13 @@
 package com.example.clinica_veterinaria.clinica_veterinaria.DTO;
 
-import java.util.List;
-
-import com.example.clinica_veterinaria.clinica_veterinaria.model.Consulta;
-
 import lombok.Data;
 
 @Data
 public class VeterinarioDTO {
-    private String nombreVeterinario;
+    private Integer id;
+    private String nombre;
+    private String telefono;
     private String especialidad;
-    private List<Consulta> consultas;
+    private Integer totalConsultas;
 
 }

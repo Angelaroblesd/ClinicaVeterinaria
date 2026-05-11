@@ -1,2 +1,0 @@
-# ClinicaVeterinaria
-Proyecto fullstack
