@@ -44,9 +44,9 @@ public class PagoController {
     }
 
     @PostMapping
-    public ResponseEntity<Pago> agregarPago(@RequestBody Pago pago) {
+    public ResponseEntity<Pago> agregarPago(@RequestBody Pago pago,@PathVariable Integer duenoId) {
        try {
-           Pago guardado = pagoService.guardarPago(pago);
+           Pago guardado = pagoService.guardarPago(pago,duenoId);
            return new ResponseEntity<>(guardado, HttpStatus.CREATED);
        } catch (Exception e) {
            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -72,5 +72,13 @@ public class PagoController {
            return new ResponseEntity<>(resultado, HttpStatus.NOT_FOUND);
        }
     }
+
+    @GetMapping("/total-recaudado/{clinicaId}")
+    public ResponseEntity<Integer> totalRecaudadoPorClinica(
+        @PathVariable Integer clinicaId) {
+    Integer total = pagoService.totalRecaudadoPorClinica(clinicaId);
+    return ResponseEntity.ok(total);
+    }
+
 
 }
