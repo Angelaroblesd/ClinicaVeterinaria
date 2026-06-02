@@ -6,7 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -33,8 +33,8 @@ public class Procedimiento {
     @Size(min = 3, max = 500, message = "El nombre debe tener entre 3 y 500 caracteres")
     @Column(nullable = false, length = 500)
     private String descripcion;
-
-    @ManyToMany(mappedBy = "procedimientos")
+    
+    @OneToMany(mappedBy = "procedimiento")
     @ToString.Exclude
-    private List<Consulta> consultas;
+    private List<ConsultaProcedimiento> consultaProcedimientos;
 }
