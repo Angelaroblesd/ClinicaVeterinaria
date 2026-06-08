@@ -29,7 +29,7 @@ public class Clinica {
 
      @NotBlank(message = "El nombre de la clinica es obligatorio")
      @Size(min = 3, max = 60, message = "El nombre de la clinica debe tener entre 3 y 60 caracteres")
-     @Column(nullable = false, length = 60)
+     @Column(nullable = false, length = 60, unique = true)
      private String nombreClinica;
 
      @NotBlank(message = "la direccion de la clinica es obligatoria")

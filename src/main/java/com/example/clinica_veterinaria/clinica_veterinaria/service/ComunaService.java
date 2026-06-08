@@ -1,7 +1,6 @@
 package com.example.clinica_veterinaria.clinica_veterinaria.service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +28,10 @@ public class ComunaService {
     }
 
     public ComunaDTO buscarPorId(Integer id) {
-        Optional<Comuna> comunaBuscada = comunaRepository.findById(id);
-        if(comunaBuscada.isPresent()) {
-            Comuna comuna = comunaBuscada.get();
-            return convertirADTO(comuna);
-        }
-        return null;
+        Comuna comuna = comunaRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("comuna no encontrada"));
+
+      return convertirADTO(comuna);
     }
 
     public ComunaDTO guardar(ComunaDTO dto) {
@@ -44,14 +41,11 @@ public class ComunaService {
     }
 
     public Comuna actualizarComuna(Integer id, Comuna comuna) {
-        Optional<Comuna> comunaBuscada = comunaRepository.findById(id);
-        if(comunaBuscada.isPresent()) {
-            Comuna com = comunaBuscada.get();
-            com.setNombreComuna(comuna.getNombreComuna());
-            return comunaRepository.save(com);
-        }
+        Comuna com = comunaRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("la comuna no existe"));
+        com.setNombreComuna(comuna.getNombreComuna());
 
-        return null;
+      return comunaRepository.save(com);
     }
 
     public String eliminar(Integer id) {
@@ -66,6 +60,10 @@ public class ComunaService {
         ComunaDTO dto = new ComunaDTO();
         dto.setId(comuna.getId());
         dto.setNombreComuna(comuna.getNombreComuna());
+        if(comuna.getRegion() != null){
+        dto.setRegion(comuna.getRegion().getNombreRegion());
+        }
+
         return dto;
     }
 

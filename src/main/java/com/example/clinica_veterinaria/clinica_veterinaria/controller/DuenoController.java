@@ -27,7 +27,7 @@ public class DuenoController {
     public ResponseEntity<?> guardar(@RequestBody DuenoDTO dto){
         try{
             DuenoDTO nuevoDueno = duenoService.guardar(dto);
-            return ResponseEntity.ok(nuevoDueno);
+            return new ResponseEntity<>(nuevoDueno, HttpStatus.CREATED);
         }catch(RuntimeException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }

@@ -27,13 +27,10 @@ public class DuenoService {
     }
 
     public DuenoDTO buscarPorId(Integer id) {
-        Optional<Dueno> duenoBuscado = duenoRepository.findById(id);
-        if(duenoBuscado.isPresent()) {
-            Dueno dueno = duenoBuscado.get();
-            return convertirADTO(dueno);
-    }
+        Dueno dueno = duenoRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Dueño no encontrado"));
 
-    return null;
+    return convertirADTO(dueno);
     }
 
     public DuenoDTO guardar(DuenoDTO dto) {
@@ -64,12 +61,18 @@ public class DuenoService {
 
     private DuenoDTO convertirADTO(Dueno dueno) {
         DuenoDTO dto = new DuenoDTO();
-        dto.setId(dueno.getId());
-        dto.setRut(dueno.getRut());
-        dto.setNombre(dueno.getNombre());
-        dto.setTelefono(dueno.getTelefono());
-        dto.setDireccion(dueno.getDireccion());
-        dto.setMail(dueno.getMail());
+            dto.setId(dueno.getId());
+            dto.setRut(dueno.getRut());
+            dto.setNombre(dueno.getNombre());
+            dto.setTelefono(dueno.getTelefono());
+            dto.setDireccion(dueno.getDireccion());
+            dto.setMail(dueno.getMail());
+            if (dueno.getMascotas() != null) {
+            dto.setMascotas(dueno.getMascotas()
+                        .stream()
+                        .map(m -> m.getNombre())
+                        .collect(Collectors.toList()));
+        }
         return dto;
     }
 
@@ -100,5 +103,15 @@ public class DuenoService {
         }
         return "El dueño " + dueno.getNombre() +
             " no tiene descuento";
+    }
+
+    public Double calcularDescuento(Integer id) {
+    Dueno dueno = duenoRepository.findById(id)
+         .orElseThrow(() -> new RuntimeException("Dueño no encontrado"));
+        int cantidadMascotas = dueno.getMascotas().size();
+        if (cantidadMascotas >= 5) {
+            return 0.10;
+        }
+        return 0.0;
     }
 }
